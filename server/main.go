@@ -29,9 +29,10 @@ func handler(conn net.Conn) {
 		_, err := conn.Read(buf[:])
 		if err != nil {
 			fmt.Println("read error", err)
+			conn.Close()
 			break
 		}
-		fmt.Printf("message client:%v", string(buf))
+		fmt.Printf("message client:%v\n", string(buf))
 		_, err = conn.Write(buf)
 		if err != nil {
 			fmt.Println("write error", err)
